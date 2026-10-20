@@ -4,12 +4,12 @@ const TABS=[['act',['আইডি অ্যাক্টিভেশন','ID Acti
 async function boot(){try{await api('admin/me')}catch(e){return loginScreen()}
  cnt=await api('admin/counts');if(!localStorage.atab){const f=['act','vid','wd'].find(k=>cnt[k]>0);if(f)tab=f}
  shell();open(tab);['click','keydown','touchstart'].forEach(e=>addEventListener(e,bump));bump()}
-function bump(){clearTimeout(idle);idle=setTimeout(()=>{api('admin/logout',{}).finally(()=>location.replace('/admin/login'))},30*60*1000)}
+function bump(){clearTimeout(idle);idle=setTimeout(()=>{api('admin/logout',{}).finally(()=>location.replace('/admin.html'))},30*60*1000)}
 function loginScreen(){root.innerHTML=`<main style="padding-top:12vh"><div class="glass p"><h2>${L('অ্যাডমিন লগইন','Admin Login')}</h2><input id="u" placeholder="${L('ইউজারনেম','Username')}" autocomplete="username"><input id="p" type="password" placeholder="${L('পাসওয়ার্ড','Password')}" autocomplete="current-password"><button class="btn pri" style="width:100%" onclick="adminLogin()">${L('লগইন','Login')}</button><p style="text-align:center"><a href="/">← ${L('ইউজার পেজ','User page')}</a></p></div></main>`}
-async function adminLogin(){await api('admin/login',{username:$('#u').value,password:$('#p').value});location.replace('/admin')}
+async function adminLogin(){await api('admin/login',{username:$('#u').value,password:$('#p').value});location.replace('/admin.html')}
 function shell(){root.innerHTML=`<div class="glass top lens"><b>Admin</b><span class="row"><button class="btn sm" onclick="lang=lang=='bn'?'en':'bn';localStorage.lang=lang;shell();open(tab)">${lang=='bn'?'EN':'বাং'}</button><button class="btn sm red" onclick="logout()">⏻ ${L('লগআউট','Logout')}</button></span></div><main><div class="glass tabs" id="tabs"></div><div id="v"></div></main>`;drawTabs()}
 function drawTabs(){$('#tabs').innerHTML=TABS.map(([k,n])=>`<button class="btn ${k==tab?'on':''}" onclick="open('${k}')">${L(...n)}${cnt[k]>0&&['act','vid','wd'].includes(k)?`<span class="red-dot">${cnt[k]}</span>`:''}</button>`).join('')}
-async function logout(){if(await dlg(L('আপনি কি লগআউট করতে চান?','Are you sure you want to log out?'),0,L('লগআউট','Logout'))){await api('admin/logout',{});location.replace('/admin/login')}}
+async function logout(){if(await dlg(L('আপনি কি লগআউট করতে চান?','Are you sure you want to log out?'),0,L('লগআউট','Logout'))){await api('admin/logout',{});location.replace('/admin.html')}}
 addEventListener('pageshow',e=>{if(e.persisted)location.reload()});
 async function refreshCounts(){cnt=await api('admin/counts');drawTabs()}
 async function open(t){tab=t;localStorage.atab=t;F={status:'pending',q:'',page:0};drawTabs();const v=$('#v');v.innerHTML='<div class="glass p">…</div>';

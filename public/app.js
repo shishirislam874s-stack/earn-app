@@ -11,7 +11,7 @@ async function authScreen(mode='login'){let ref=localStorage.ref,rn='';if(ref&&m
  <div class="row" style="margin:8px 0"><button class="btn grow ${reg?'':'pri'}" onclick="authScreen('login')">${L('লগইন','Login')}</button><button class="btn grow ${reg?'pri':''}" onclick="authScreen('register')">${L('রেজিস্টার','Register')}</button></div>
  ${reg?`<input id="nm" placeholder="${L('নাম','Name')}" maxlength=40>`:''}<input id="ph" inputmode="tel" placeholder="${L('ফোন নম্বর (01XXXXXXXXX)','Phone (01XXXXXXXXX)')}" maxlength=11><input id="pw" type="password" placeholder="${L('পাসওয়ার্ড','Password')}">
  <button class="btn pri" style="width:100%;margin-top:8px" onclick="doAuth(${reg})">${reg?L('রেজিস্টার করুন','Create account'):L('লগইন করুন','Login')}</button></div>
- <div class="glass p" style="text-align:center"><a class="btn" href="/admin/login">${L('অ্যাডমিন লগইন','Admin Login')}</a></div></main>`;
+ <div class="glass p" style="text-align:center"><a class="btn" href="/admin.html">${L('অ্যাডমিন লগইন','Admin Login')}</a></div></main>`;
  if(rn)toast(L('রেফার করেছেন: ','Referred by: ')+rn)}
 async function doAuth(reg){const b={phone:$('#ph').value.trim(),password:$('#pw').value};if(reg){b.name=$('#nm').value.trim();b.ref=localStorage.ref}
  await api(reg?'register':'login',b);me=await api('me');view='home';shell();go('home')}
