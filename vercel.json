@@ -1,0 +1,1 @@
+{"functions":{"api/index.js":{"maxDuration":20}},"rewrites":[{"source":"/api/(.*)","destination":"/api/index.js"},{"source":"/admin","destination":"/admin.html"},{"source":"/admin/login","destination":"/admin.html"}]}

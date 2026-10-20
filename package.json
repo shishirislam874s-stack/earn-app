@@ -1,0 +1,1 @@
+{"name":"earn-app","version":"1.0.0","private":true,"main":"api/index.js","engines":{"node":"20.x"},"scripts":{"start":"node local.js"},"dependencies":{"bcryptjs":"^2.4.3","express":"^4.19.2","pg":"^8.12.0"}}
